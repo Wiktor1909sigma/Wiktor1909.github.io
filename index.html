@@ -5,132 +5,140 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MINECRAFT CORE SYSTEM</title>
     <style>
-        /* Kosmiczne tło z ruchomymi gwiazdami */
+        /* Ciemne tło z powoli latającymi gwiazdami */
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #020208 url('https://transparenttextures.com') repeat;
-            animation: moveStars 100s linear infinite;
+            background-color: #030616;
+            background-image: url('https://transparenttextures.com');
+            /* Animacja przesuwania tła o nazwie 'latajaceGwiazdy' trwająca 120 sekund w nieskończoność */
+            animation: latajaceGwiazdy 120s linear infinite;
+            font-family: 'Courier New', Courier, monospace;
             color: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             min-height: 100vh;
+            box-sizing: border-box;
+            padding: 40px 20px;
             overflow-x: hidden;
         }
 
-        @keyframes moveStars {
-            from { background-position: 0 0; }
-            to { background-position: 1000px 1000px; }
+        /* Reguły poruszania się tła */
+        @keyframes latajaceGwiazdy {
+            from {
+                background-position: 0 0;
+            }
+            to {
+                background-position: 1000px -1000px;
+            }
         }
 
-        /* Górny lewy róg strony */
+        /* Lewy górny róg */
         .top-left {
             position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            opacity: 0.8;
-        }
-
-        /* Główny kontener */
-        .container {
-            text-align: center;
-            max-width: 1000px;
-            width: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        /* Świecący nagłówek główny */
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            letter-spacing: 4px;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            color: #ffffff;
-            text-shadow: 0 0 10px #38b6ff, 0 0 20px #38b6ff, 0 0 40px #38b6ff;
-        }
-
-        /* Podtytuł */
-        .subtitle {
-            font-size: 0.9rem;
-            color: #a5a6bc;
+            top: 25px;
+            left: 40px;
+            font-weight: bold;
+            font-size: 14px;
             letter-spacing: 1px;
-            margin-bottom: 50px;
         }
 
-        /* Układ kafelków / przycisków */
+        /* Kontener główny nagłówka */
+        .header-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* Wielki, świecący napis główny */
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px #3273ff, 0 0 20px #3273ff, 0 0 30px #3273ff;
+        }
+
+        /* Mały podtytuł szarym tekstem */
+        .subtitle {
+            font-size: 11px;
+            color: #7b819b;
+            letter-spacing: 1px;
+        }
+
+        /* Siatka przycisków - dokładnie 3 kolumny */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(3, 270px);
+            gap: 25px 35px;
             justify-content: center;
-            margin-bottom: 60px;
-            padding: 0 20px;
+            margin: auto 0;
         }
 
-        /* Wygląd pojedynczego przycisku */
+        /* Wygląd kafelków 1:1 */
         .card-btn {
-            background: linear-gradient(135deg, #0d122b 0%, #111a42 100%);
-            border: 1px solid #1f2d6d;
-            border-radius: 12px;
-            padding: 45px 20px;
-            font-size: 1.1rem;
+            background: linear-gradient(180deg, #101935 0%, #0b1024 100%);
+            border: 1px solid #1c2b5a;
+            color: #ffffff;
+            padding: 45px 10px;
+            font-size: 14px;
             font-weight: bold;
-            color: #92b2ff;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(13, 18, 43, 0.5);
+            transition: all 0.2s ease;
+            box-shadow: 0 0 15px rgba(26, 43, 98, 0.4);
         }
 
-        /* Efekt po najechaniu myszką (świecenie) */
+        /* Efekt świecenia całego przycisku po najechaniu */
         .card-btn:hover {
-            transform: translateY(-5px);
-            border-color: #38b6ff;
-            color: #ffffff;
-            box-shadow: 0 0 20px rgba(56, 182, 255, 0.4), inset 0 0 15px rgba(56, 182, 255, 0.2);
-            text-shadow: 0 0 8px #38b6ff;
+            border-color: #3877ff;
+            box-shadow: 0 0 25px rgba(56, 119, 255, 0.6);
+            text-shadow: 0 0 5px #ffffff;
         }
 
         /* Stopka na samym dole */
         .footer {
-            font-size: 0.8rem;
-            color: #56586b;
+            font-size: 11px;
+            color: #434963;
             letter-spacing: 1px;
-            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Dopasowanie do telefonów (żeby przyciski nie wychodziły poza ekran) */
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                width: 100%;
+                padding: 0 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Twój nick w lewym górnym rogu -->
-    <div class="top-left">Wiktor19009</div>
+    <!-- Nazwa w lewym górnym rogu -->
+    <div class="top-left">'Wiktor1909.</div>
 
-    <div class="container">
-        <!-- Główny napis -->
+    <div class="header-container">
         <h1>MINECRAFT CORE SYSTEM</h1>
-        <div class="subtitle">Kliknij system, aby zobaczyć szczegóły.</div>
+        <div class="subtitle">Kliknij system aby zobaczyć demo.</div>
+    </div>
 
-        <!-- Przyciski (Możesz zmienić ich nazwy poniżej) -->
-        <div class="grid">
-            <button class="card-btn">Sklepy</button>
-            <button class="card-btn">Osiągnięcia</button>
-            <button class="card-btn">Strefa AFK</button>
-            <button class="card-btn">Skrzynki</button>
-            <button class="card-btn">Rynek</button>
-        </div>
+    <!-- Układ przycisków -->
+    <div class="grid">
+        <button class="card-btn">Sklepy</button>
+        <button class="card-btn">Osiągnięcia</button>
+        <button class="card-btn">Strefa AFK</button>
+        <button class="card-btn">Skrzynki</button>
+        <button class="card-btn">Rynek</button>
+    </div>
 
-        <!-- Stopka z Twoim kontaktem na dole -->
-        <div class="footer">
-            &copy; 2026 Wiktor19009 - Discord: Wiktor19009
-        </div>
+    <!-- Stopka z Twoim Discordem -->
+    <div class="footer">
+        &copy; 2026 Dc/Discord - Wiktor19009
     </div>
 
 </body>
